@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,4 +27,14 @@ class CategoryRepositoryTest {
         assertEquals(categories.size(), 4);
     }
 
+    @Test
+    void findByName() throws Exception {
+        Optional<Category> category = categoryRepository.findByName("Fruits");
+
+        if (category.isEmpty()) {
+            throw new Exception();
+        }
+
+        assertEquals(category.get().getName(), "Fruits");
+    }
 }
